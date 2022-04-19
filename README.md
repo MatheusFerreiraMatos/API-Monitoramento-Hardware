@@ -1,6 +1,6 @@
 # Projeto de Monitoramento de Hardware
 
-### O projeto visa monitorar hardware de computadores de desenvolvedores, para ajudar e facilitar na busca da melhor experiência possível com o seu computador, o projeto consome outras APIs como: [Loooca](https://github.com/Britooo/looca-api.git) e [Slack](https://github.com/BandTec/integracao-slack.git) desenvolvidas e adptadas pela [@SPTech](https://github.com/BandTec).
+### O projeto visa monitorar hardware de computadores de desenvolvedores, para ajudar e facilitar na busca da melhor experiência possível com o seu computador, o projeto consome outras APIs como: [Loooca](https://github.com/Britooo/looca-api.git) e [Slack](https://github.com/BandTec/integracao-slack.git) desenvolvidas e/ou adptadas pela [@SPTech](https://github.com/BandTec).
 
 ## Estrutura dos diretórios
 
@@ -47,3 +47,8 @@
         logo-onhome-branco.png
         logo-onhome-preto.png
 ```
+
+### Diretório Java
+#### No diretório java fica todos os pacotes de class diividos pelo método MVC.
+### Pacote Connection
+#### Pacote com as class responsáveis pela conexão com o banco de dados (MYSql e Azure)
