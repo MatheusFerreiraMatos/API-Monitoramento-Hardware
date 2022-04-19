@@ -48,18 +48,18 @@
         logo-onhome-preto.png
 ```
 
-### Diretório Java
-**No diretório java fica todos os pacotes de class dividos pelo método MVC.**
-### Pacote Connection
-**Pacote com as class responsáveis pela conexão com o banco de dados (MYSql e Azure)**
-### Pacote Model
-**Pacote com as class responsáveis de encapsular os atributos e fazer as tratativas dos dados.**
-### Pacote View
-**Pacote com as class e forms responsáveis por ilustrar o funcionamento do projeto em telas do Java Swing.**
-### Pacote Controller
-**Pacote com as class responsáveis pela lógica e execução da querys com o banco de dados.**
-### Diretório Resources
-**Diretório responsável por armazenar as imagens usadas nas Telas.**
+- ### Diretório Java
+    **No diretório java fica todos os pacotes de class dividos pelo método MVC.**
+- ### Pacote Connection
+    **Pacote com as class responsáveis pela conexão com o banco de dados (MYSql e Azure)**
+- ### Pacote Model
+    **Pacote com as class responsáveis de encapsular os atributos e fazer as tratativas dos dados.**
+- ### Pacote View
+    **Pacote com as class e forms responsáveis por ilustrar o funcionamento do projeto em telas do Java Swing.**
+- ### Pacote Controller
+    **Pacote com as class responsáveis pela lógica e execução da querys com o banco de dados.**
+- ### Diretório Resources
+    **Diretório responsável por armazenar as imagens usadas nas Telas.**
 
 ## Instalação
 #### O arquivo pom.xml já possui todas as dependencias necessarias para o uso da Aplicação.
