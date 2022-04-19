@@ -6,7 +6,7 @@
 
 ### Para melhor organização e entendimento do processo de captura de dados e envio de alertas/mensagens, utilizamos o método MVC(Model-View-Controller) para a estruturação das class e Jframs(Telas). 
 
-´´´
+```
 +---java
 |   +---connection
 |   |       Connection.java
@@ -46,4 +46,4 @@
         logo-casa.png
         logo-onhome-branco.png
         logo-onhome-preto.png
-´´´
+```
