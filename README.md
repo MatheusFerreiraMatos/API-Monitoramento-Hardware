@@ -49,7 +49,7 @@
 ```
 
 ### Diretório Java
-**No diretório java fica todos os pacotes de class diividos pelo método MVC.**
+**No diretório java fica todos os pacotes de class dividos pelo método MVC.**
 ### Pacote Connection
 **Pacote com as class responsáveis pela conexão com o banco de dados (MYSql e Azure)**
 ### Pacote Model
@@ -117,7 +117,7 @@ $ mvn install
 ```
 
 **Com a class de conexão configurada, vamos testar essa conexão.**
-**Na class TestandoConexão temos um pequeno scipt de teste, onde criamos uma tabela, inserimos, mostramos e deletamos a mesma para o teste da conexão com o banco, execute essa class MAIN, esperamos o seguinte resultado:**
+**Na class TestandoConexão.java temos um pequeno script de teste, onde criamos uma tabela, inserimos, mostramos e deletamos a mesma para o teste da conexão com o banco, execute essa class MAIN, esperamos o seguinte resultado:**
 
 ```
 ----------------------[ Testando Banco de Dados ]-----------------------
