@@ -52,3 +52,5 @@
 #### No diretório java fica todos os pacotes de class diividos pelo método MVC.
 ### Pacote Connection
 #### Pacote com as class responsáveis pela conexão com o banco de dados (MYSql e Azure)
+### Pacote Model
+#### Pacote com as class responsáveis de encapsular os atributos e 
