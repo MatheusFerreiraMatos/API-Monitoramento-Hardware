@@ -4,7 +4,7 @@
 
 ## Estrutura dos diretórios
 
-### Para melhor organização e entendimento do processo de captura de dados e envio de alertas/mensagens, utilizamos o método MVC(Model-View-Controller) para a estruturação das class e Jframs(Telas). 
+### Para melhor organização e entendimento do processo de captura de dados e envio de alertas/mensagens, utilizamos o método MVC(Model-View-Controller) para a estruturação das class e Jframes(Telas). 
 
 ```
 +---java
@@ -55,4 +55,8 @@
 ### Pacote Model
 #### Pacote com as class responsáveis de encapsular os atributos e fazer as tratativas dos dados.
 ### Pacote View
-#### Pacote 
+#### Pacote com as class e forms responsáveis por ilustrar o funcionamento do projeto em telas do Java Swing.
+### Pacote Controller
+#### Pacote com as class responsáveis pela lógica e execução da querys com o banco de dados.
+### Diretório Resources
+#### Diretório responsável por armazenar as imagens usadas nas Telas.
