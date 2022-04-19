@@ -53,4 +53,6 @@
 ### Pacote Connection
 #### Pacote com as class responsáveis pela conexão com o banco de dados (MYSql e Azure)
 ### Pacote Model
-#### Pacote com as class responsáveis de encapsular os atributos e 
+#### Pacote com as class responsáveis de encapsular os atributos e fazer as tratativas dos dados.
+### Pacote View
+#### Pacote 
