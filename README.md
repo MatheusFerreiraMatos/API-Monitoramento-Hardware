@@ -148,3 +148,15 @@ Apliccation pronta para ser usada! OnHome
 **Com o teste do Banco de Dados já realizado, podemos colocar a Aplicação para rodar**
 
 ***Realize o Build do projeto para a compilação e geração do arquivo .jar para assim inicar a coleta de dados da máquina***
+
+## Executando arquivo .jar
+# 
+**ficará aqui, imagens!!! -> Lembrete
+
+## Desenvolvedores
+#
+- @feliveiracamara
+- @gabrielsouzaexe
+- @julianaesteves
+- @matheusferreira079
+- @msuttobr
