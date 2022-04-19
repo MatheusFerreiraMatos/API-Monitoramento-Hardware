@@ -49,7 +49,7 @@
 ```
 
 ### Diretório Java
-** No diretório java fica todos os pacotes de class diividos pelo método MVC.**
+**No diretório java fica todos os pacotes de class diividos pelo método MVC.**
 ### Pacote Connection
 ** Pacote com as class responsáveis pela conexão com o banco de dados (MYSql e Azure)**
 ### Pacote Model
