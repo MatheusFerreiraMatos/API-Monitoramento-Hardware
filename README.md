@@ -98,7 +98,7 @@
     </dependencies>
 ```
 
-**Instale pele linha de comando(Terminal) as dependências com o comando:**
+**Instale pela linha de comando(Terminal) as dependências com o comando:**
 ```
 $ mvn install
 ```
