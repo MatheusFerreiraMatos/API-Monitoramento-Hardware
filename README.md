@@ -1,6 +1,6 @@
 # Projeto de Monitoramento de Hardware
 
-### O projeto visa monitorar hardware de computadores de desenvolvedores, para ajudar e facilitar na busca da melhor experiência possível com o seu computador, o projeto consome outras APIs como: [Loooca](https://github.com/Britooo/looca-api.git) e [Slack](https://github.com/BandTec/integracao-slack.git) desenvolvidas e/ou adptadas pela [@SPTech](https://github.com/BandTec).
+### O projeto visa monitorar hardware de computadores de desenvolvedores, para ajudar e facilitar na busca da melhor experiência possível com o seu computador, o projeto consome outras APIs como: [Looca](https://github.com/Britooo/looca-api.git) e [Slack](https://github.com/BandTec/integracao-slack.git) desenvolvidas e/ou adptadas pela [@SPTech](https://github.com/BandTec).
 
 ## Estrutura dos diretórios
 
