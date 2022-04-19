@@ -160,3 +160,7 @@ Apliccation pronta para ser usada! OnHome
 - @julianaesteves
 - @matheusferreira079
 - @msuttobr
+
+## Licença
+#
+© 2022 OnHome
