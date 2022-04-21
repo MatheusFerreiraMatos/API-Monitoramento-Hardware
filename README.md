@@ -10,25 +10,26 @@
 +---java
 |   +---connection
 |   |       Connection.java
-|   |       TestandoConexao.java
 |   |
 |   +---controller
 |   |       ControllerComputadores.java
-|   |       ControllerLogin.java
 |   |       ControllerMonitoramento.java
-|   |       ControllerNotificacoes.java
-|   |       ControllerProcessos.java
-|   |       ControllerTabelas.java
+|   |       ControllerProcesso.java
+|   |       ControllerSlack.java
+|   |       ControllerUsuario.java
 |   |
-|   +---model
-|   |       Computadores.java
-|   |       Contador.java
+|   +---looca
 |   |       Cpu.java
 |   |       Disco.java
-|   |       InfoMaquina.java
 |   |       Ram.java
-|   |       Slack.java
-|   |       Usuario.java
+|   |       Sistema.java
+|   |
+|   +---model
+|   |       ModelComputadores.java
+|   |       ModelMonitoramento.java
+|   |       ModelProcesso.java
+|   |       ModelSlack.java
+|   |       ModelUsuario.java
 |   |
 |   \---view
 |           TelaCpu.form
@@ -58,6 +59,8 @@
     **Pacote com as class e forms responsáveis por ilustrar o funcionamento do projeto em telas do Java Swing.**
 - ### Pacote Controller
     **Pacote com as class responsáveis pela lógica e execução da querys com o banco de dados.**
+- ### Pacote looca
+    **Pacote com as class responsáveis de fazer as tratativas dos dados que são coletados da api-looca, onde por sua vez são mandados para as models, controllers e telas do java swing**
 - ### Diretório Resources
     **Diretório responsável por armazenar as imagens usadas nas Telas.**
 
@@ -117,7 +120,7 @@ $ mvn install
 ```
 
 **Com a class de conexão configurada, vamos testar essa conexão.**
-**Na class TestandoConexão.java temos um pequeno script de teste, onde criamos uma tabela, inserimos, mostramos e deletamos a mesma para o teste da conexão com o banco, execute essa class MAIN, esperamos o seguinte resultado:**
+**Na class TestandoConexao.java temos um pequeno script de teste, onde criamos uma tabela, inserimos, mostramos e deletamos a mesma para o teste da conexão com o banco, execute essa class MAIN, esperamos o seguinte resultado:**
 
 ```
 ----------------------[ Testando Banco de Dados ]-----------------------
