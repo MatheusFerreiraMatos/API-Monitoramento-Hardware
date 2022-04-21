@@ -1,10 +1,10 @@
-package model;
+package looca;
 
 import com.github.britooo.looca.api.group.memoria.Memoria;
 
 /**
  *
- * @author mathe
+ * @author Matheus Mattos
  */
 public class Ram {
 

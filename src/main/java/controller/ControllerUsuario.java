@@ -1,9 +1,8 @@
 package controller;
 
-import model.Usuario;
 import connection.Connection;
 import java.util.List;
-import model.Contador;
+import model.ModelUsuario;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -11,25 +10,30 @@ import org.springframework.jdbc.core.JdbcTemplate;
  *
  * @author Matheus Mattos
  */
-public class ControllerLogin {
+public class ControllerUsuario {
+
+    private String nomeUsuario;
 
     public Boolean logar(String email, String senha) {
 
         Connection config = new Connection();
         JdbcTemplate connect = new JdbcTemplate(config.getDataSource());
-        Contador contador = new Contador();
 
         Boolean valida = false;
 
-        List<Usuario> user;
+        List<ModelUsuario> user;
         user = connect.query("SELECT * FROM Usuario WHERE emailUser = ? AND senhaUser = ?",
-                new BeanPropertyRowMapper<>(Usuario.class), email, senha);
+                new BeanPropertyRowMapper<>(ModelUsuario.class), email, senha);
 
         if (!user.isEmpty()) {
             valida = true;
-            contador.setTotalSelect(+1);
         }
 
         return valida;
     }
+
+    public String getNomeUsuario() {
+        return nomeUsuario = "admin";
+    }
+
 }

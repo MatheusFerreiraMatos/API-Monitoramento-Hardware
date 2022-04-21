@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
 import java.awt.Image;
@@ -9,12 +5,12 @@ import java.awt.Toolkit;
 import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
-import model.Cpu;
-import model.InfoMaquina;
+import model.ModelComputadores;
+import model.ModelMonitoramento;
 
 /**
  *
- * @author mathe
+ * @author Matheus Mattos
  */
 public class TelaCpu extends javax.swing.JFrame {
 
@@ -23,7 +19,8 @@ public class TelaCpu extends javax.swing.JFrame {
      */
     public TelaCpu() {
         initComponents();
-        Cpu infoCpu = new Cpu();
+        ModelMonitoramento modelMonitoramento = new ModelMonitoramento();
+        ModelComputadores modelComputadores = new ModelComputadores();
 
         // Variaveis para adicionar "favicon" na barra superior da página;
         URL caminhoImagem = this.getClass().getClassLoader().getResource("logo-casa.png");
@@ -34,13 +31,13 @@ public class TelaCpu extends javax.swing.JFrame {
         Integer delay = 1000;
         Integer interval = 1000;
 
-        respostaNomeProcessador.setText(infoCpu.getNome());
-        respostaProcessadorFisico.setText(infoCpu.getProcessadoresFisicos() + "");
-        respostaProcessadorLogico.setText(infoCpu.getProcessadoresLogicos() + "");
+        respostaNomeProcessador.setText(modelComputadores.getModeloProcessador());
+        respostaProcessadorFisico.setText(modelMonitoramento.getProcessadorFisico() + "");
+        respostaProcessadorLogico.setText(modelMonitoramento.getProcessadorLogico()+ "");
 
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
-                respostaUsabilidade.setText(String.format("%.2f %%", infoCpu.getUsabilidade()));
+                respostaUsabilidade.setText(String.format("%.2f %%", modelMonitoramento.getUsoCpu()));
             }
         }, delay, interval);
 
@@ -281,6 +278,8 @@ public class TelaCpu extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaCpu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

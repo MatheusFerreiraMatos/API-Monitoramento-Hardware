@@ -1,24 +1,16 @@
 package view;
 
-import connection.Connection;
 import controller.ControllerComputadores;
-import controller.ControllerLogin;
 import controller.ControllerMonitoramento;
-import controller.ControllerNotificacoes;
-import controller.ControllerProcessos;
-import controller.ControllerTabelas;
+import controller.ControllerProcesso;
+import controller.ControllerSlack;
+import controller.ControllerUsuario;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 /**
  *
  * @author Matheus Mattos
@@ -32,7 +24,7 @@ public class TelaLogin extends javax.swing.JFrame {
         initComponents();
         //Colocando cor no fundo da página;
         getContentPane().setBackground(Color.decode("#080425"));
-        
+
         // Variaveis para adicionar "favicon" na barra superior da página;
         URL caminhoImagem = this.getClass().getClassLoader().getResource("logo-casa.png");
         Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(caminhoImagem);
@@ -114,27 +106,31 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void jButtonAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcessarActionPerformed
         TelaPrincipal telaPrincipal = new TelaPrincipal();
-        ControllerLogin validar = new ControllerLogin();
-        ControllerComputadores insertEquip = new ControllerComputadores();
-        ControllerMonitoramento insertMonit = new ControllerMonitoramento();
-        ControllerProcessos insertProce = new ControllerProcessos();
-        ControllerTabelas criarTabelas = new ControllerTabelas();
-        ControllerNotificacoes controllerNotificacoes = new ControllerNotificacoes();
-        System.out.println("Olá ao console da aplicação da OnHome\n");
+        ControllerUsuario validar = new ControllerUsuario();
+        ControllerComputadores controllerComputadores = new ControllerComputadores();
+        ControllerMonitoramento controllerMonitoramento = new ControllerMonitoramento();
+        ControllerProcesso controllerProcessos = new ControllerProcesso();
+        ControllerSlack controllerNotificacoes = new ControllerSlack();
+
+        System.out.println("-------------------------------[ OnHome ]-------------------------------");
 
         if (validar.logar(jTextFieldUsuario.getText(), new String(jPasswordFieldSenha.getPassword()))) {
-            System.out.println("Conectando ao Banco de Dados...");
-            System.out.println("Banco Local Selecionado!");
+            System.out.println("\nOlá ao terminal da aplicação da OnHome \\(^-^)/\n");
+            System.out.println("---------------------------[ Banco de Dados ]---------------------------\n");
+            System.out.println("Conectando ao Banco de Dados...\n");
+            System.out.println("Banco de Dados Conectado!\n");
             controllerNotificacoes.enviarNotificacao();
-            criarTabelas.criarTabelas();
-            insertEquip.inserirEquipamento();
-            insertMonit.inserirDadosMonitoramento();
-            insertProce.inserirDadosProcesso();
+            controllerComputadores.insertComputador();
+            System.out.println("-----------------------------[ Descrição ]------------------------------\n");
+            controllerMonitoramento.insertMonitoramento();
+            controllerProcessos.insertProcesso();
             telaPrincipal.setVisible(true);
             dispose();
 
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Senha e/ou usuário inválidos!");
+            System.out.println("\nOlá ao terminal da aplicação da OnHome \\(^-^)/\n");
+            System.out.println("Senha e/ou usuário inválidos! (X_X)");
+            JOptionPane.showMessageDialog(rootPane, "Senha e/ou usuário inválidos! (X_X)");
         }
     }//GEN-LAST:event_jButtonAcessarActionPerformed
 
@@ -172,6 +168,7 @@ public class TelaLogin extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

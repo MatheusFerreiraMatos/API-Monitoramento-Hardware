@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
 import java.awt.Image;
@@ -9,11 +5,11 @@ import java.awt.Toolkit;
 import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
-import model.Disco;
+import looca.Disco;
 
 /**
  *
- * @author mathe
+ * @author Matheus Mattos
  */
 public class TelaDisco extends javax.swing.JFrame {
 
@@ -262,6 +258,14 @@ public class TelaDisco extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaDisco.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
