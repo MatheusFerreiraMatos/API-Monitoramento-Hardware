@@ -1,6 +1,7 @@
 package controller;
 
 import connection.Connection;
+import java.net.UnknownHostException;
 import java.util.List;
 import model.ModelComputadores;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -19,26 +20,28 @@ public class ControllerComputadores {
     
     List<ModelComputadores> computador;
     
-    public void insertComputador(){
+    public void insertComputador() throws UnknownHostException{
         
         System.out.println("-----------------------------[ Computador ]-----------------------------");
         System.out.println("Validando computador...");
                 
         computador = connect.query("SELECT * FROM Computadores WHERE "
-                + "idProcessador = ? AND modeloProcessador = ?", 
+                + "idComputador = ? AND hostName = ?", 
                 new BeanPropertyRowMapper<>(ModelComputadores.class),
-                modelComputadores.getIdProcessador(),
-                modelComputadores.getModeloProcessador());
+                modelComputadores.getIdComputador(),
+                modelComputadores.getHostName());
         
         if (computador.isEmpty()) {
             
             System.out.println("Computador não existente na base de dados.\ninserindo...\n");
             
             connect.update("INSERT INTO Computadores"
-                    + "(sistemaOperacional, modeloProcessador,"
+                    + "(idComputador, hostName, sistemaOperacional, modeloProcessador,"
                     + "idProcessador, tamanhoDisco, tamanhoDiscoSecundario,"
                     + "tamanhoRam, fkUsuario) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?)", 
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", 
+                    modelComputadores.getIdComputador(),
+                    modelComputadores.getHostName(),
                     modelComputadores.getSistemaOperacional(),
                     modelComputadores.getModeloProcessador(),
                     modelComputadores.getIdProcessador(),

@@ -5,6 +5,8 @@ import com.github.britooo.looca.api.group.memoria.Memoria;
 import com.github.britooo.looca.api.group.processador.Processador;
 import com.github.britooo.looca.api.group.sistema.Sistema;
 import connection.Connection;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
@@ -13,6 +15,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 public class ModelComputadores {
 
+    private String idComputador;
+    private String hostName;
     private String sistemaOperacional;
     private String modeloProcessador;
     private String idProcessador;
@@ -28,6 +32,16 @@ public class ModelComputadores {
     DiscosGroup disco = new DiscosGroup();
     Memoria memoria = new Memoria();
 
+    public String getIdComputador() throws UnknownHostException {
+        idComputador = InetAddress.getLocalHost().getHostAddress();
+        return idComputador;
+    }
+
+    public String getHostName() throws UnknownHostException {
+        hostName = InetAddress.getLocalHost().getHostName();
+        return hostName;
+    }
+    
     public String getSistemaOperacional() {
         return sistema.getSistemaOperacional();
     }

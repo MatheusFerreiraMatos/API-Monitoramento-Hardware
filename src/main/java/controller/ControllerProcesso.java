@@ -21,29 +21,28 @@ public class ControllerProcesso {
     ProcessosGroup processos = new ProcessosGroup();
 
     Timer timer = new Timer();
-    Integer delay = 20000;
-    Integer interval = 2000;
+    Integer delay = 5000;
+    Integer interval = 30000;
 
     public void insertProcesso() {
 
         timer.scheduleAtFixedRate(new TimerTask() {
 
             public void run() {
+                System.out.println("Insert realizado na tabela Processo.");
 
                 for (int i = 0; i < processos.getProcessos().size(); i++) {
 
                     connect.update("INSERT INTO Processo"
                             + "(nomeProcesso, usoCpu, usoMemoria, usoGpu,"
                             + "fkComputador, dataCaptura)"
-                            + "VALUES (?, ?, ?, ?, ?, ?)", 
+                            + "VALUES (?, ?, ?, ?, ?, ?)",
                             processos.getProcessos().get(i).getNome(),
                             processos.getProcessos().get(i).getUsoCpu(),
                             processos.getProcessos().get(i).getUsoMemoria(),
                             processos.getProcessos().get(i).getMemoriaVirtualUtilizada(),
                             modelProcesso.getFkComputador(),
                             modelProcesso.getDataHoraCaptura());
-                    
-                    System.out.println("Insert realizado na tabela Processo.");
                 }
             }
         }, delay, interval);

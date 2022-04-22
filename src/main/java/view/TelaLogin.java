@@ -9,6 +9,9 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -54,7 +57,7 @@ public class TelaLogin extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jButtonAcessar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButtonAcessar.setText("Sing in");
+        jButtonAcessar.setText("Sign in");
         jButtonAcessar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAcessarActionPerformed(evt);
@@ -85,7 +88,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jLabelUsuario.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelUsuario.setText("E-mail Adress");
+        jLabelUsuario.setText("E-mail Address");
         getContentPane().add(jLabelUsuario);
         jLabelUsuario.setBounds(340, 50, 110, 20);
 
@@ -115,17 +118,21 @@ public class TelaLogin extends javax.swing.JFrame {
         System.out.println("-------------------------------[ OnHome ]-------------------------------");
 
         if (validar.logar(jTextFieldUsuario.getText(), new String(jPasswordFieldSenha.getPassword()))) {
-            System.out.println("\nOlá ao terminal da aplicação da OnHome \\(^-^)/\n");
-            System.out.println("---------------------------[ Banco de Dados ]---------------------------\n");
-            System.out.println("Conectando ao Banco de Dados...\n");
-            System.out.println("Banco de Dados Conectado!\n");
-            controllerNotificacoes.enviarNotificacao();
-            controllerComputadores.insertComputador();
-            System.out.println("-----------------------------[ Descrição ]------------------------------\n");
-            controllerMonitoramento.insertMonitoramento();
-            controllerProcessos.insertProcesso();
-            telaPrincipal.setVisible(true);
-            dispose();
+            try {
+                System.out.println("\nOlá ao terminal da aplicação da OnHome \\(^-^)/\n");
+                System.out.println("---------------------------[ Banco de Dados ]---------------------------\n");
+                System.out.println("Conectando ao Banco de Dados...\n");
+                System.out.println("Banco de Dados Conectado!\n");
+                controllerNotificacoes.enviarNotificacao();
+                controllerComputadores.insertComputador();
+                System.out.println("-----------------------------[ Descrição ]------------------------------\n");
+                controllerMonitoramento.insertMonitoramento();
+                controllerProcessos.insertProcesso();
+                telaPrincipal.setVisible(true);
+                dispose();
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         } else {
             System.out.println("\nOlá ao terminal da aplicação da OnHome \\(^-^)/\n");

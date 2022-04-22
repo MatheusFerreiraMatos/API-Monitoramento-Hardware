@@ -19,7 +19,7 @@ public class ControllerMonitoramento {
 
     Timer timer = new Timer();
     Integer delay = 5000;
-    Integer interval = 1000;
+    Integer interval = 3000;
 
     public void insertMonitoramento() {
 
