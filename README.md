@@ -144,7 +144,7 @@ Tudo ok!?
 Deletando tabela onHome...
 Tabela excluida com sucesso!!! BANCO DE DADOS OK!
 ------------------------------------------------------------------------
-Apliccation pronta para ser usada! OnHome
+Application pronta para ser usada! OnHome
 ------------------------------------------------------------------------
 ```
 
