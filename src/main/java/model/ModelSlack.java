@@ -5,6 +5,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
+import java.util.List;
 import org.json.JSONObject;
 
 /**
@@ -14,26 +16,35 @@ import org.json.JSONObject;
 public class ModelSlack {
 
     private static final HttpClient client = HttpClient.newHttpClient();
-    private static final String URL = "https://hooks.slack.com/services/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";
+    private static final List<String> URL = new ArrayList<>();
 
     public static void sendMessage(JSONObject content) throws IOException, InterruptedException {
 
-        HttpRequest request = HttpRequest.newBuilder(
-                URI.create(URL))
-                .header("accept", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(content.toString()))
-                .build();
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        URL.add("https://hooks.slack.com/services/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");
+        URL.add("https://hooks.slack.com/services/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");
+        URL.add("https://hooks.slack.com/services/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");
 
         System.out.println("-------------------------------[ Slack ]--------------------------------");
-        System.out.println("Enviando mensagem de usuário logando...");
-        System.out.println(String.format("Status: %s", response.statusCode()));
-        System.out.println(String.format("Response: %s", response.body()));
-        if (response.statusCode() == 200) {
-            System.out.println("Mensagem enviada com sucesso!");
-        } else {
-            System.out.println("Mensagem não enviada! (X_X)");
+        System.out.println("\nEnviando mensagem de usuário logando...\n");
+
+        for (int i = 0; i < URL.size(); i++) {
+
+            HttpRequest request = HttpRequest.newBuilder(
+                    URI.create(URL.get(i)))
+                    .header("accept", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(content.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            System.out.println(String.format("Status: %s", response.statusCode()));
+            System.out.println(String.format("Response: %s", response.body()));
+            if (response.statusCode() == 200) {
+                System.out.println("Mensagem enviada com sucesso!\n");
+            } else {
+                System.out.println("Mensagem não enviada! (X_X)\n");
+            }
         }
+
     }
 }

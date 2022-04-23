@@ -52,6 +52,6 @@ public class TestandoConexao {
 
         System.out.println("-".repeat(72));
 
-        System.out.println("Apliccation pronta para ser usada! OnHome");
+        System.out.println("Application pronta para ser usada! OnHome");
     }
 }
