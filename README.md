@@ -10,6 +10,7 @@
 +---java
 |   +---connection
 |   |       Connection.java
+|   |       TestandoConexao.java
 |   |
 |   +---controller
 |   |       ControllerComputadores.java
