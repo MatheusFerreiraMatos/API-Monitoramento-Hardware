@@ -22,14 +22,13 @@ public class ControllerProcesso {
 
     Timer timer = new Timer();
     Integer delay = 5000;
-    Integer interval = 30000;
+    Integer interval = 10000;
 
     public void insertProcesso() {
 
         timer.scheduleAtFixedRate(new TimerTask() {
 
             public void run() {
-                System.out.println("Insert realizado na tabela Processo.");
 
                 for (int i = 0; i < processos.getProcessos().size(); i++) {
 
@@ -44,6 +43,7 @@ public class ControllerProcesso {
                             modelProcesso.getFkComputador(),
                             modelProcesso.getDataHoraCaptura());
                 }
+
             }
         }, delay, interval);
     }

@@ -19,12 +19,14 @@ public class ControllerMonitoramento {
 
     Timer timer = new Timer();
     Integer delay = 5000;
-    Integer interval = 3000;
+    Integer interval = 10000;
 
     public void insertMonitoramento() {
 
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
+                System.out.println("Insert realizando na tabela Monitoramento...");
+                System.out.println("Insert realizando na tabela Processo...");
 
                 connect.update("INSERT INTO Monitoramento"
                         + "(processadorLogico, processadorFisico, usandoCpu, "
@@ -40,7 +42,8 @@ public class ControllerMonitoramento {
                         modelMonitoramento.getTempoLigada(),
                         modelMonitoramento.getFkComputador());
 
-                System.out.println("Insert realizado na tabela Monitoramento.");
+                System.out.println("Insert realizado na tabela Monitoramento!");
+                System.out.println("Insert realizado na tabela Processo!");
             }
         }, delay, interval);
     }
