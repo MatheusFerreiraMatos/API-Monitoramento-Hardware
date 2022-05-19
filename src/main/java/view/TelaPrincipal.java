@@ -7,17 +7,17 @@ import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 import looca.Sistema;
+import model.Usuario;
 
 /**
  *
  * @author Matheus Mattos
  */
 public class TelaPrincipal extends javax.swing.JFrame {
-
     public TelaPrincipal() {
         initComponents();
         Sistema sistema = new Sistema();
-        ControllerUsuario usuario = new ControllerUsuario();
+        Usuario usuario = new Usuario();
 
         // Variaveis para adicionar "favicon" na barra superior da página;
         URL caminhoImagem = this.getClass().getClassLoader().getResource("logo-casa.png");
@@ -28,6 +28,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Integer delay = 1000;
         Integer interval = 1000;
 
+        System.out.println(usuario.getNomeUsuario());
         respostaUsuario.setText(usuario.getNomeUsuario());
         respostaSisOperacional.setText(sistema.getSistemaOperacional());
         respostaArquitetura.setText(sistema.getArquitetura() + " bits");

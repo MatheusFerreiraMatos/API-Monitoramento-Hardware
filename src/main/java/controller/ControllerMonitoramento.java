@@ -1,10 +1,15 @@
 package controller;
 
 import connection.Connection;
+import java.net.UnknownHostException;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import logger.Log;
 import model.ModelMonitoramento;
 import org.springframework.jdbc.core.JdbcTemplate;
+import view.TelaLogin;
 
 /**
  *
@@ -12,8 +17,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 public class ControllerMonitoramento {
 
-    Connection config = new Connection();
-    JdbcTemplate connect = new JdbcTemplate(config.getDataSource());
+    Log log = new Log();
+    Connection configAzure = new Connection();
+    JdbcTemplate connectAzure = new JdbcTemplate(configAzure.getDataSource());
+    Connection configMysql = new Connection(true);
+    JdbcTemplate connectMysql = new JdbcTemplate(configMysql.getDataSource());
 
     ModelMonitoramento modelMonitoramento = new ModelMonitoramento();
 
@@ -25,25 +33,44 @@ public class ControllerMonitoramento {
 
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
-                System.out.println("Insert realizando na tabela Monitoramento...");
-                System.out.println("Insert realizando na tabela Processo...");
+                try {
+                    System.out.println("Realizando insert na tabela Monitoramento...");
+                    log.append("Realizando insert na tabela Monitoramento...");
 
-                connect.update("INSERT INTO Monitoramento"
-                        + "(processadorLogico, processadorFisico, usandoCpu, "
-                        + "usandoDisco, usandoRam, dataHoraCaptura, "
-                        + "tempoLigada, fkComputador) VALUES "
-                        + "(?, ?, ?, ?, ?, ?, ?, ?)",
-                        modelMonitoramento.getProcessadorLogico(),
-                        modelMonitoramento.getProcessadorFisico(),
-                        modelMonitoramento.getUsoCpu(),
-                        modelMonitoramento.getUsoDisco(),
-                        modelMonitoramento.getUsoRam(),
-                        modelMonitoramento.getDataHoraCaptura(),
-                        modelMonitoramento.getTempoLigada(),
-                        modelMonitoramento.getFkComputador());
+                    String sqlInsert = "INSERT INTO Monitoramento"
+                            + "(processadorLogico, processadorFisico, usandoCpu, "
+                            + "usandoDisco, usandoRam, dataHoraCaptura, "
+                            + "tempoLigada, fkComputador) VALUES "
+                            + "(?, ?, ?, ?, ?, ?, ?, ?)";
 
-                System.out.println("Insert realizado na tabela Monitoramento!");
-                System.out.println("Insert realizado na tabela Processo!");
+                    connectAzure.update(sqlInsert,
+                            modelMonitoramento.getProcessadorLogico(),
+                            modelMonitoramento.getProcessadorFisico(),
+                            modelMonitoramento.getUsoCpu(),
+                            modelMonitoramento.getUsoDisco(),
+                            modelMonitoramento.getUsoRam(),
+                            modelMonitoramento.getDataHoraCaptura(),
+                            modelMonitoramento.getTempoLigada(),
+                            modelMonitoramento.getFkComputador());
+
+                    connectMysql.update(sqlInsert,
+                            modelMonitoramento.getProcessadorLogico(),
+                            modelMonitoramento.getProcessadorFisico(),
+                            modelMonitoramento.getUsoCpu(),
+                            modelMonitoramento.getUsoDisco(),
+                            modelMonitoramento.getUsoRam(),
+                            modelMonitoramento.getDataHoraCaptura(),
+                            modelMonitoramento.getTempoLigada(),
+                            modelMonitoramento.getFkComputador());
+                    
+                    System.out.println("Insert realizado na tabela Monitoramento!");
+                    log.append("Insert realizado na tabela Monitoramento!");
+
+                } catch (Exception e) {
+                    Logger.getLogger(ControllerMonitoramento.class.getName()).log(Level.SEVERE, null, e);
+                    log.append(e.getMessage());
+                }
+
             }
         }, delay, interval);
     }

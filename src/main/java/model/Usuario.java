@@ -4,21 +4,11 @@
  */
 package model;
 
-import connection.Connection;
-import java.util.List;
-import java.util.Map;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-
 /**
  *
  * @author mathe
  */
-public class ModelUsuario {
-
-    Connection config = new Connection();
-    JdbcTemplate connect = new JdbcTemplate(config.getDataSource());
-    
+public class Usuario {
     private Integer idUsuario;
     private String nomeUsuario;
     private String emailUser;
@@ -85,7 +75,8 @@ public class ModelUsuario {
 
     @Override
     public String toString() {
-        return "\nidUsuario=" + idUsuario + ", \nnomeUsuario=" + nomeUsuario + ", \nemailUser=" + emailUser + ", \nsenhaUser=" + senhaUser + ", \nfkEmpresa=" + fkEmpresa + ", \nfkPermissao=" + fkPermissao + ", \nfkEspecialidade=" + fkEspecialidade + '}';
+        return "Usuario{" + "idUsuario=" + idUsuario + ", nomeUsuario=" + nomeUsuario + ", emailUser=" + emailUser + ", senhaUser=" + senhaUser + ", fkEmpresa=" + fkEmpresa + ", fkPermissao=" + fkPermissao + ", fkEspecialidade=" + fkEspecialidade + '}';
     }
-
+    
+    
 }

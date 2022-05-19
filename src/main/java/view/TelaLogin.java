@@ -13,6 +13,9 @@ import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import logger.Log;
+import model.ModelUsuario;
+import model.Usuario;
 
 /**
  *
@@ -108,35 +111,53 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcessarActionPerformed
+        Log log = new Log();
+        log.createDirectory();
+        log.createFile();
         TelaPrincipal telaPrincipal = new TelaPrincipal();
         ControllerUsuario validar = new ControllerUsuario();
+        ModelUsuario usuario = new ModelUsuario();
         ControllerComputadores controllerComputadores = new ControllerComputadores();
         ControllerMonitoramento controllerMonitoramento = new ControllerMonitoramento();
         ControllerProcesso controllerProcessos = new ControllerProcesso();
         ControllerSlack controllerNotificacoes = new ControllerSlack();
-
+        Usuario usuario1 = new Usuario();
+        
         System.out.println("-------------------------------[ OnHome ]-------------------------------");
+        log.append("-------------------------------[ OnHome ]-------------------------------");
+        System.out.println("\nOlá ao terminal da aplicação da OnHome \\(^-^)/\n");
+        log.append("\nOlá ao terminal da aplicação da OnHome \\(^-^)/\n");
+        
+        String email = jTextFieldUsuario.getText();
+        String senha = new String(jPasswordFieldSenha.getPassword());
 
-        if (validar.logar(jTextFieldUsuario.getText(), new String(jPasswordFieldSenha.getPassword()))) {
+        if (validar.logar(email, senha)) {
             try {
-                System.out.println("\nOlá ao terminal da aplicação da OnHome \\(^-^)/\n");
+                validar.mostrar(email, senha);
+                System.out.println(usuario1.getEmailUser());
+                System.out.println(usuario.getEmailUser());
                 System.out.println("---------------------------[ Banco de Dados ]---------------------------\n");
+                log.append("---------------------------[ Banco de Dados ]---------------------------\n");
                 System.out.println("Conectando ao Banco de Dados...\n");
+                log.append("Conectando ao Banco de Dados...");
                 System.out.println("Banco de Dados Conectado!\n");
+                log.append("Banco de Dados Conectado!\n");
                 controllerNotificacoes.enviarNotificacao();
                 controllerComputadores.insertComputador();
                 System.out.println("-----------------------------[ Descrição ]------------------------------\n");
+                log.append("-----------------------------[ Descrição ]------------------------------\n");
                 controllerMonitoramento.insertMonitoramento();
                 controllerProcessos.insertProcesso();
                 telaPrincipal.setVisible(true);
                 dispose();
             } catch (UnknownHostException ex) {
                 Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+                log.append(ex.getMessage());
             }
 
         } else {
-            System.out.println("\nOlá ao terminal da aplicação da OnHome \\(^-^)/\n");
             System.out.println("Senha e/ou usuário inválidos! (X_X)");
+            log.append("Senha e/ou usuário inválidos! (X_X)");
             JOptionPane.showMessageDialog(rootPane, "Senha e/ou usuário inválidos! (X_X)");
         }
     }//GEN-LAST:event_jButtonAcessarActionPerformed

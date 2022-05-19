@@ -1,7 +1,9 @@
 C:\Users\mathe\OneDrive - SPTech School\Documents\NetBeansProjects\api-monitoramento-hardware-onhome\src\main\java\model\ModelSlack.java
+C:\Users\mathe\OneDrive - SPTech School\Documents\NetBeansProjects\api-monitoramento-hardware-onhome\src\main\java\rowMapper\UsuarioRowMapper.java
 C:\Users\mathe\OneDrive - SPTech School\Documents\NetBeansProjects\api-monitoramento-hardware-onhome\src\main\java\view\TelaRam.java
 C:\Users\mathe\OneDrive - SPTech School\Documents\NetBeansProjects\api-monitoramento-hardware-onhome\src\main\java\controller\ControllerComputadores.java
 C:\Users\mathe\OneDrive - SPTech School\Documents\NetBeansProjects\api-monitoramento-hardware-onhome\src\main\java\looca\Ram.java
+C:\Users\mathe\OneDrive - SPTech School\Documents\NetBeansProjects\api-monitoramento-hardware-onhome\src\main\java\model\Teste.java
 C:\Users\mathe\OneDrive - SPTech School\Documents\NetBeansProjects\api-monitoramento-hardware-onhome\src\main\java\view\TelaLogin.java
 C:\Users\mathe\OneDrive - SPTech School\Documents\NetBeansProjects\api-monitoramento-hardware-onhome\src\main\java\controller\ControllerProcesso.java
 C:\Users\mathe\OneDrive - SPTech School\Documents\NetBeansProjects\api-monitoramento-hardware-onhome\src\main\java\connection\Connection.java
@@ -9,6 +11,7 @@ C:\Users\mathe\OneDrive - SPTech School\Documents\NetBeansProjects\api-monitoram
 C:\Users\mathe\OneDrive - SPTech School\Documents\NetBeansProjects\api-monitoramento-hardware-onhome\src\main\java\looca\Cpu.java
 C:\Users\mathe\OneDrive - SPTech School\Documents\NetBeansProjects\api-monitoramento-hardware-onhome\src\main\java\controller\ControllerUsuario.java
 C:\Users\mathe\OneDrive - SPTech School\Documents\NetBeansProjects\api-monitoramento-hardware-onhome\src\main\java\controller\ControllerMonitoramento.java
+C:\Users\mathe\OneDrive - SPTech School\Documents\NetBeansProjects\api-monitoramento-hardware-onhome\src\main\java\logger\Log.java
 C:\Users\mathe\OneDrive - SPTech School\Documents\NetBeansProjects\api-monitoramento-hardware-onhome\src\main\java\looca\Disco.java
 C:\Users\mathe\OneDrive - SPTech School\Documents\NetBeansProjects\api-monitoramento-hardware-onhome\src\main\java\looca\Sistema.java
 C:\Users\mathe\OneDrive - SPTech School\Documents\NetBeansProjects\api-monitoramento-hardware-onhome\src\main\java\model\ModelComputadores.java

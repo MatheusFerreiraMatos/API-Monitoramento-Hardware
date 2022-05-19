@@ -20,9 +20,9 @@ public class ModelSlack {
 
     public static void sendMessage(JSONObject content) throws IOException, InterruptedException {
 
-        URL.add("https://hooks.slack.com/services/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");
-        //URL.add("https://hooks.slack.com/services/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");
-        //URL.add("https://hooks.slack.com/services/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");
+        URL.add("https://hooks.slack.com/services/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");
+        URL.add("https://hooks.slack.com/services/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");
+        URL.add("https://hooks.slack.com/services/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");
 
         System.out.println("-------------------------------[ Slack ]--------------------------------");
         System.out.println("\nEnviando mensagem de usuário logando...\n");

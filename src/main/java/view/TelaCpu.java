@@ -13,7 +13,6 @@ import model.ModelMonitoramento;
  * @author Matheus Mattos
  */
 public class TelaCpu extends javax.swing.JFrame {
-
     /**
      * Creates new form TelaPrincipal
      */
@@ -30,7 +29,7 @@ public class TelaCpu extends javax.swing.JFrame {
         Timer timer = new Timer();
         Integer delay = 1000;
         Integer interval = 1000;
-
+        
         respostaNomeProcessador.setText(modelComputadores.getModeloProcessador());
         respostaProcessadorFisico.setText(modelMonitoramento.getProcessadorFisico() + "");
         respostaProcessadorLogico.setText(modelMonitoramento.getProcessadorLogico()+ "");
@@ -290,7 +289,6 @@ public class TelaCpu extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonDisco;
     private javax.swing.JButton buttonRam;

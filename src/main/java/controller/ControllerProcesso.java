@@ -2,10 +2,15 @@ package controller;
 
 import com.github.britooo.looca.api.group.processos.ProcessosGroup;
 import connection.Connection;
+import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import logger.Log;
 import model.ModelProcesso;
 import org.springframework.jdbc.core.JdbcTemplate;
+import view.TelaLogin;
 
 /**
  *
@@ -13,8 +18,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 public class ControllerProcesso {
 
-    Connection config = new Connection();
-    JdbcTemplate connect = new JdbcTemplate(config.getDataSource());
+    Log log = new Log();
+
+    Connection configAzure = new Connection();
+    JdbcTemplate connectAzure = new JdbcTemplate(configAzure.getDataSource());
+    Connection configMysql = new Connection(true);
+    JdbcTemplate connectMysql = new JdbcTemplate(configMysql.getDataSource());
 
     ModelProcesso modelProcesso = new ModelProcesso();
 
@@ -30,18 +39,39 @@ public class ControllerProcesso {
 
             public void run() {
 
-                for (int i = 0; i < processos.getProcessos().size(); i++) {
+                try {
+                    for (int i = 0; i < processos.getProcessos().size(); i++) {
 
-                    connect.update("INSERT INTO Processo"
-                            + "(nomeProcesso, usoCpu, usoMemoria, usoGpu,"
-                            + "fkComputador, dataCaptura)"
-                            + "VALUES (?, ?, ?, ?, ?, ?)",
-                            processos.getProcessos().get(i).getNome(),
-                            processos.getProcessos().get(i).getUsoCpu(),
-                            processos.getProcessos().get(i).getUsoMemoria(),
-                            processos.getProcessos().get(i).getMemoriaVirtualUtilizada(),
-                            modelProcesso.getFkComputador(),
-                            modelProcesso.getDataHoraCaptura());
+                        System.out.println("Realizando insert na tabela Processo...");
+                        log.append("Realizando insert na tabela Processo...");
+
+                        String sqlInsert = "INSERT INTO Processo"
+                                + "(nomeProcesso, usoCpu, usoMemoria, usoGpu,"
+                                + "fkComputador, dataCaptura)"
+                                + "VALUES (?, ?, ?, ?, ?, ?)";
+
+                        connectAzure.update(sqlInsert,
+                                processos.getProcessos().get(i).getNome(),
+                                processos.getProcessos().get(i).getUsoCpu(),
+                                processos.getProcessos().get(i).getUsoMemoria(),
+                                processos.getProcessos().get(i).getMemoriaVirtualUtilizada(),
+                                modelProcesso.getFkComputador(),
+                                modelProcesso.getDataHoraCaptura());
+
+                        connectMysql.update(sqlInsert,
+                                processos.getProcessos().get(i).getNome(),
+                                processos.getProcessos().get(i).getUsoCpu(),
+                                processos.getProcessos().get(i).getUsoMemoria(),
+                                processos.getProcessos().get(i).getMemoriaVirtualUtilizada(),
+                                modelProcesso.getFkComputador(),
+                                modelProcesso.getDataHoraCaptura());
+
+                        System.out.println("Insert realizado na tabela Processo!");
+                        log.append("Insert realizado na tabela Processo!");
+                    }
+                } catch (Exception e) {
+                    Logger.getLogger(ControllerProcesso.class.getName()).log(Level.SEVERE, null, e);
+                    log.append(e.getMessage());
                 }
 
             }

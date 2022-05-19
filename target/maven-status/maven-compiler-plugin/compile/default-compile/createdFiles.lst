@@ -13,11 +13,13 @@ model\ModelUsuario.class
 controller\ControllerComputadores.class
 controller\ControllerProcesso$1.class
 model\ModelProcesso.class
+model\Teste.class
 view\TelaPrincipal.class
 view\TelaRam$2.class
 controller\ControllerMonitoramento.class
 view\TelaDisco$1.class
 connection\TestandoConexao.class
+logger\Log$1.class
 view\TelaRam$5.class
 view\TelaLogin$4.class
 view\TelaPrincipal$4.class
@@ -30,7 +32,9 @@ looca\Disco.class
 controller\ControllerProcesso.class
 view\TelaLogin$3.class
 model\ModelComputadores.class
+rowMapper\UsuarioRowMapper.class
 view\TelaPrincipal$6.class
+logger\Log.class
 view\TelaDisco$3.class
 view\TelaCpu$3.class
 connection\Connection.class
