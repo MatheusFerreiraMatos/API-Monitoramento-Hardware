@@ -12,7 +12,6 @@ import controller.ControllerUsuario;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import logger.Log;
 import model.ModelUsuario;
 
@@ -26,7 +25,6 @@ public class Principal {
         Log log = new Log();
         log.createDirectory();
         log.createFile();
-        TelaPrincipal telaPrincipal = new TelaPrincipal();
         ControllerUsuario validar = new ControllerUsuario();
         ModelUsuario usuario = new ModelUsuario();
         ControllerComputadores controllerComputadores = new ControllerComputadores();
@@ -57,7 +55,6 @@ public class Principal {
                 controllerMonitoramento.insertMonitoramento();
                 controllerProcessos.insertProcesso();
             } catch (UnknownHostException ex) {
-                Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
                 log.append(ex.getMessage());
             }
 

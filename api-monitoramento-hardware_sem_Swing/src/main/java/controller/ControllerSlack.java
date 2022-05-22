@@ -11,7 +11,6 @@ import model.ModelUsuario;
 import org.json.JSONObject;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import view.TelaLogin;
 
 /**
  *

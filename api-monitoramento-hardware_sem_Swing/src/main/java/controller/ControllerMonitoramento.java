@@ -12,7 +12,6 @@ import model.ModelComputadores;
 import model.ModelMonitoramento;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import view.TelaLogin;
 
 /**
  *
