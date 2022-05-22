@@ -28,7 +28,7 @@ public class Connection {
         dataSource  = new BasicDataSource();
         //Banco Local - Descomente para utilizá-lo
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/onhome");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/onhome?autoReconnect=true&useSSL=false");
         dataSource.setUsername("root");
         dataSource.setPassword("2ads@grupo10");
     }
