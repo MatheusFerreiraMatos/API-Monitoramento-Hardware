@@ -10,7 +10,3 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-/api-monitoramento-hardware_sem_Swing/target/
-/api-monitoramento-hardware_com_swing/target/
