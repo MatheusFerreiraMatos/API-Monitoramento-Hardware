@@ -29,7 +29,7 @@ public class Connection {
         //Banco Local - Descomente para utilizá-lo
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/onhome");
-        dataSource.setUsername("onhome");
+        dataSource.setUsername("root");
         dataSource.setPassword("2ads@grupo10");
     }
 
