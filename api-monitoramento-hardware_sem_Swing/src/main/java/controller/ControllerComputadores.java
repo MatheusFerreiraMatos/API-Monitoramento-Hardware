@@ -21,8 +21,8 @@ public class ControllerComputadores {
 
     Connection configAzure = new Connection();
     JdbcTemplate connectAzure = new JdbcTemplate(configAzure.getDataSource());
-    //Connection configMysql = new Connection(true);
-    //JdbcTemplate connectMysql = new JdbcTemplate(configMysql.getDataSource());
+    Connection configMysql = new Connection(true);
+    JdbcTemplate connectMysql = new JdbcTemplate(configMysql.getDataSource());
 
     ModelComputadores modelComputadores = new ModelComputadores();
 
@@ -41,12 +41,12 @@ public class ControllerComputadores {
                 new BeanPropertyRowMapper<>(ModelComputadores.class),
                 modelComputadores.getIpComputador(),
                 modelComputadores.getHostName());
-/*
+
         computador = connectMysql.query(sqlSelect,
                 new BeanPropertyRowMapper<>(ModelComputadores.class),
                 modelComputadores.getIpComputador(),
                 modelComputadores.getHostName());
-*/
+
         if (computador.isEmpty()) {
 
             try {
@@ -68,7 +68,7 @@ public class ControllerComputadores {
                         + "idProcessador, tamanhoDisco, tamanhoDiscoSecundario,"
                         + "tamanhoRam, fkUsuario) "
                         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-/*
+
                 connectMysql.update(sqlInsert,
                         modelComputadores.getIpComputador(),
                         modelComputadores.getHostName(),
@@ -79,7 +79,7 @@ public class ControllerComputadores {
                         modelComputadores.getTamanhoDiscoSecundario(),
                         modelComputadores.getTamanhoRam(),
                         idUsuario);
-*/
+
                 connectAzure.update(sqlInsert,
                         modelComputadores.getIpComputador(),
                         modelComputadores.getHostName(),

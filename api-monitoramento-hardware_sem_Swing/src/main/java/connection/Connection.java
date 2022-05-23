@@ -23,16 +23,16 @@ public class Connection {
         dataSource.setUsername("AdminOnHome");
         dataSource.setPassword("2ads@grupo10");
     }
-/*
+
     public Connection(Boolean valida) {
         dataSource  = new BasicDataSource();
         //Banco Local - Descomente para utilizá-lo
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/onhome?autoReconnect=true&useSSL=false");
+        dataSource.setUrl("jdbc:mysql://f004d3b6f352:3306/onhome?autoReconnect=true&useSSL=false");
         dataSource.setUsername("root");
         dataSource.setPassword("2ads@grupo10");
     }
-*/
+
     public BasicDataSource getDataSource() {
         return dataSource;
     }

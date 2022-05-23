@@ -38,7 +38,7 @@ public class ControllerUsuario {
             userAzure = connectAzure.query("SELECT (nomeUsuario) FROM Usuario WHERE emailUser = ? AND senhaUser = ?",
                     new BeanPropertyRowMapper<>(ModelUsuario.class), email, senha);
 
-            if (!userMysql.isEmpty() || userAzure.isEmpty()) {
+            if (!userAzure.isEmpty() || !userMysql.isEmpty()) {
                 valida = true;
                 log.append("Usuário válido! executando aplicação...");
             }
