@@ -19,8 +19,8 @@ public class ControllerUsuario {
     ModelUsuario usuario = new ModelUsuario();
     Connection configAzure = new Connection();
     JdbcTemplate connectAzure = new JdbcTemplate(configAzure.getDataSource());
-    Connection configMysql = new Connection(true);
-    JdbcTemplate connectMysql = new JdbcTemplate(configMysql.getDataSource());
+    //Connection configMysql = new Connection(true);
+    //JdbcTemplate connectMysql = new JdbcTemplate(configMysql.getDataSource());
 
     public Boolean logar(String email, String senha) {
 
@@ -29,16 +29,16 @@ public class ControllerUsuario {
         Boolean valida = false;
 
         List<ModelUsuario> userAzure;
-        List<ModelUsuario> userMysql;
+        //List<ModelUsuario> userMysql;
         try {
 
-            userMysql = connectMysql.query("SELECT (nomeUsuario) FROM Usuario WHERE emailUser = ? AND senhaUser = ?",
-                    new BeanPropertyRowMapper<>(ModelUsuario.class), email, senha);
+            //userMysql = connectMysql.query("SELECT (nomeUsuario) FROM Usuario WHERE emailUser = ? AND senhaUser = ?",
+                //    new BeanPropertyRowMapper<>(ModelUsuario.class), email, senha);
 
             userAzure = connectAzure.query("SELECT (nomeUsuario) FROM Usuario WHERE emailUser = ? AND senhaUser = ?",
                     new BeanPropertyRowMapper<>(ModelUsuario.class), email, senha);
 
-            if (!userMysql.isEmpty() || userAzure.isEmpty()) {
+            if (userAzure.isEmpty()) {
                 valida = true;
                 log.append("Usuário válido! executando aplicação...");
             }

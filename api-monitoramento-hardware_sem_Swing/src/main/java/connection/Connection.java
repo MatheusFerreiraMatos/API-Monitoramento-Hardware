@@ -23,7 +23,7 @@ public class Connection {
         dataSource.setUsername("AdminOnHome");
         dataSource.setPassword("2ads@grupo10");
     }
-
+/*
     public Connection(Boolean valida) {
         dataSource  = new BasicDataSource();
         //Banco Local - Descomente para utilizá-lo
@@ -32,7 +32,7 @@ public class Connection {
         dataSource.setUsername("root");
         dataSource.setPassword("2ads@grupo10");
     }
-
+*/
     public BasicDataSource getDataSource() {
         return dataSource;
     }

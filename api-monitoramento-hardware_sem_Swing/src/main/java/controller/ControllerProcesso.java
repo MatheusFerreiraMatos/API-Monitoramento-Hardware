@@ -25,8 +25,8 @@ public class ControllerProcesso {
 
     Connection configAzure = new Connection();
     JdbcTemplate connectAzure = new JdbcTemplate(configAzure.getDataSource());
-    Connection configMysql = new Connection(true);
-    JdbcTemplate connectMysql = new JdbcTemplate(configMysql.getDataSource());
+    //Connection configMysql = new Connection(true);
+    //JdbcTemplate connectMysql = new JdbcTemplate(configMysql.getDataSource());
 
     ModelProcesso modelProcesso = new ModelProcesso();
     ProcessosGroup processos = new ProcessosGroup();
@@ -46,7 +46,7 @@ public class ControllerProcesso {
 
                     Integer idComputador = 0;
 
-                    List<ModelComputadores> computador = connectMysql.query("SELECT * FROM Computadores WHERE ipComputador = ? AND hostName = ?",
+                    List<ModelComputadores> computador = connectAzure.query("SELECT * FROM Computadores WHERE ipComputador = ? AND hostName = ?",
                             new BeanPropertyRowMapper(ModelComputadores.class), modelComputadores.getIpComputador(), modelComputadores.getHostName());
                     for (ModelComputadores comp : computador) {
                         idComputador = comp.getIdComputador();
@@ -69,7 +69,7 @@ public class ControllerProcesso {
                                 processos.getProcessos().get(i).getMemoriaVirtualUtilizada(),
                                 idComputador,
                                 modelProcesso.getDataHoraCaptura());
-
+/*
                         connectMysql.update(sqlInsert,
                                 processos.getProcessos().get(i).getNome(),
                                 processos.getProcessos().get(i).getUsoCpu(),
@@ -77,7 +77,7 @@ public class ControllerProcesso {
                                 processos.getProcessos().get(i).getMemoriaVirtualUtilizada(),
                                 idComputador,
                                 modelProcesso.getDataHoraCaptura());
-
+*/
                         System.out.println("Insert realizado na tabela Processo!");
                         log.append("Insert realizado na tabela Processo!");
                     }

@@ -48,7 +48,7 @@ public class Principal {
                 log.append("Conectando ao Banco de Dados...");
                 System.out.println("Banco de Dados Conectado!\n");
                 log.append("Banco de Dados Conectado!\n");
-                controllerNotificacoes.enviarNotificacao(email, senha);
+                //controllerNotificacoes.enviarNotificacao(email, senha);
                 controllerComputadores.insertComputador(email, senha);
                 System.out.println("-----------------------------[ Descrição ]------------------------------\n");
                 log.append("-----------------------------[ Descrição ]------------------------------\n");

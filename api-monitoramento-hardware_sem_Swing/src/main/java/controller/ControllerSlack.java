@@ -24,20 +24,20 @@ public class ControllerSlack {
     ModelUsuario usuario = new ModelUsuario();
     Connection configAzure = new Connection();
     JdbcTemplate connectAzure = new JdbcTemplate(configAzure.getDataSource());
-    Connection configMysql = new Connection(true);
-    JdbcTemplate connectMysql = new JdbcTemplate(configMysql.getDataSource());
+    //Connection configMysql = new Connection(true);
+    //JdbcTemplate connectMysql = new JdbcTemplate(configMysql.getDataSource());
 
     public void enviarNotificacao(String email, String senha) {
 
         String nomeUser = "";
-
+/*
         List<ModelUsuario> listUser = connectMysql.query("SELECT * FROM Usuario WHERE emailUser = ? AND senhaUser = ?",
-                new BeanPropertyRowMapper(ModelUsuario.class), email, senha);
+               new BeanPropertyRowMapper(ModelUsuario.class), email, senha);
         
         for (ModelUsuario user : listUser) {
             nomeUser = user.getNomeUsuario();
         }
-
+*/
         json.put("text", String.format("Usuário %s acessou a aplicação OnHome", nomeUser));
 
         try {

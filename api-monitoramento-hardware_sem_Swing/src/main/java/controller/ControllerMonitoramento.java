@@ -22,8 +22,8 @@ public class ControllerMonitoramento {
     Log log = new Log();
     Connection configAzure = new Connection();
     JdbcTemplate connectAzure = new JdbcTemplate(configAzure.getDataSource());
-    Connection configMysql = new Connection(true);
-    JdbcTemplate connectMysql = new JdbcTemplate(configMysql.getDataSource());
+    //Connection configMysql = new Connection(true);
+    //JdbcTemplate connectMysql = new JdbcTemplate(configMysql.getDataSource());
 
     ModelMonitoramento modelMonitoramento = new ModelMonitoramento();
     ModelComputadores modelComputadores = new ModelComputadores();
@@ -42,7 +42,7 @@ public class ControllerMonitoramento {
 
                     Integer idComputador = 0;
 
-                    List<ModelComputadores> computador = connectMysql.query("SELECT * FROM Computadores WHERE ipComputador = ? AND hostName = ?",
+                    List<ModelComputadores> computador = connectAzure.query("SELECT * FROM Computadores WHERE ipComputador = ? AND hostName = ?",
                             new BeanPropertyRowMapper(ModelComputadores.class), modelComputadores.getIpComputador(), modelComputadores.getHostName());
                     for (ModelComputadores comp : computador) {
                         idComputador = comp.getIdComputador();
@@ -63,7 +63,7 @@ public class ControllerMonitoramento {
                             modelMonitoramento.getDataHoraCaptura(),
                             modelMonitoramento.getTempoLigada(),
                             idComputador);
-
+/*
                     connectMysql.update(sqlInsert,
                             modelMonitoramento.getProcessadorLogico(),
                             modelMonitoramento.getProcessadorFisico(),
@@ -73,7 +73,7 @@ public class ControllerMonitoramento {
                             modelMonitoramento.getDataHoraCaptura(),
                             modelMonitoramento.getTempoLigada(),
                             idComputador);
-
+*/
                     System.out.println("Insert realizado na tabela Monitoramento!");
                     log.append("Insert realizado na tabela Monitoramento!");
 
