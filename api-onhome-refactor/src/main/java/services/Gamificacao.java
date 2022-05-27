@@ -12,6 +12,7 @@ import java.util.TimerTask;
 import org.json.JSONObject;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import utils.Log;
 
 /**
  *
@@ -34,7 +35,9 @@ public class Gamificacao {
     String nomeUser = "não identificado";
 
     public void enviarNotificacao(String email, String senha) {
-
+        Log log = new Log();
+        System.setOut(log);
+        System.setErr(log);
         List<Usuario> listUser = connect.query("SELECT * FROM Usuario WHERE emailUser = ? AND senhaUser = ?",
                 new BeanPropertyRowMapper(Usuario.class), email, senha);
         for (Usuario user : listUser) {

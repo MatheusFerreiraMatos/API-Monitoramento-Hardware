@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import utils.Log;
 
 /**
  *
@@ -31,6 +32,9 @@ public class Processo {
     Integer interval = 5000;
 
     public void insertProcesso() {
+        Log log = new Log();
+        System.setOut(log);
+        System.setErr(log);
 
         timer.scheduleAtFixedRate(new TimerTask() {
 
