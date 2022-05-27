@@ -76,6 +76,7 @@ public class Log extends PrintStream {
         }).start();
     }
     public void println(String s) {
+        orig.println(s);
         list.add(s);
         append(s);
     }
