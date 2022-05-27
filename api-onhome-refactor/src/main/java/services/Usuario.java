@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import utils.Log;
 
 /**
  *
@@ -29,7 +30,9 @@ public class Usuario {
     JdbcTemplate connect = new JdbcTemplate(config.getDataSource());
 
     public Boolean logar(String email, String senha) {
-
+        Log log = new Log();
+        System.setOut(log);
+        System.setErr(log);
         Boolean valida = false;
 
         try {

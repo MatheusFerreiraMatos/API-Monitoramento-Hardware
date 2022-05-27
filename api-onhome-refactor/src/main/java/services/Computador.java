@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import utils.Log;
 
 /**
  *
@@ -40,7 +41,9 @@ public class Computador {
     List<Computador> computador;
 
     public void insertComputador(String email, String senha) throws UnknownHostException {
-
+        Log log = new Log();
+        System.setOut(log);
+        System.setErr(log);
         System.out.println("-----------------------------[ Computador ]-----------------------------");
         System.out.println("Validando computador...");
 
