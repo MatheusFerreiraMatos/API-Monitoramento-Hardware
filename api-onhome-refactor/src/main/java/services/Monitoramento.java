@@ -15,7 +15,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import utils.Cpu;
+import utils.Disco;
 import utils.Log;
+import utils.Ram;
 
 /**
  *
@@ -32,14 +35,21 @@ public class Monitoramento {
     private String tempoLigada;
     private Integer fkComputador;
 
-    Connection config = new Connection();
-    JdbcTemplate connect = new JdbcTemplate(config.getDataSource());
+    Connection configAzure = new Connection();
+    JdbcTemplate connectAzure = new JdbcTemplate(configAzure.getDataSource());
+    Connection configMysql = new Connection(true);
+    JdbcTemplate connectMysql = new JdbcTemplate(configMysql.getDataSource());
+
     Processador processador = new Processador();
     DiscosGroup disco = new DiscosGroup();
     Memoria memoria = new Memoria();
     Sistema sistema = new Sistema();
     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
     Computador comp = new Computador();
+    
+    Ram usabilidadeRam = new Ram();
+    Disco usabilidadeDisco = new Disco();
+    Cpu usabilidadeCpu = new Cpu();
 
     Timer timer = new Timer();
     Integer delay = 5000;
@@ -54,32 +64,56 @@ public class Monitoramento {
                 try {
                     System.out.println("Realizando insert na tabela Monitoramento...");
 
-                    Integer idComputador = 0;
+                    Integer idComputadorAzure = 0;
 
-                    List<Computador> Listcomputador = connect.query("SELECT * FROM Computadores WHERE ipComputador = ? AND hostName = ?",
+                    List<Computador> ListcomputadorAzure = connectAzure.query("SELECT * FROM Computadores WHERE ipComputador = ? AND hostName = ?",
                             new BeanPropertyRowMapper(Computador.class), comp.getIpComputador(), comp.getHostName());
-                    for (Computador comp : Listcomputador) {
-                        idComputador = comp.getIdComputador();
+                    for (Computador comp : ListcomputadorAzure) {
+                        idComputadorAzure = comp.getIdComputador();
                     }
 
-                    if (!Listcomputador.isEmpty()) {
-                        String sqlInsert = "INSERT INTO Monitoramento"
+                    Integer idComputadorMysql = 0;
+
+                    List<Computador> ListcomputadorMysql = connectAzure.query("SELECT * FROM Computadores WHERE ipComputador = ? AND hostName = ?",
+                            new BeanPropertyRowMapper(Computador.class), comp.getIpComputador(), comp.getHostName());
+                    for (Computador comp : ListcomputadorAzure) {
+                        idComputadorMysql = comp.getIdComputador();
+                    }
+
+                    if (!ListcomputadorAzure.isEmpty() || !ListcomputadorMysql.isEmpty()) {
+                        String sqlInsertAzure = "INSERT INTO Monitoramento"
                                 + "(processadorLogico, processadorFisico, usandoCpu, "
                                 + "usandoDisco, usandoRam, dataHoraCaptura, "
                                 + "tempoLigada, fkComputador) VALUES "
-                                + "(?, ?, ?, ?, ?, ?, ?, ?)";
+                                + "(?, ?, ?, ?, ?, GETDATE(), ?, ?)";
 
-                        connect.update(sqlInsert,
+                        connectAzure.update(sqlInsertAzure,
                                 getProcessadorLogico(),
                                 getProcessadorFisico(),
-                                getUsoCpu(),
-                                getUsoDisco(),
-                                getUsoRam(),
-                                getDataHoraCaptura(),
+                                usabilidadeCpu.getUsabilidade(),
+                                usabilidadeDisco.getUsabilidade(),
+                                usabilidadeRam.getUsabilidade(),
                                 getTempoLigada(),
-                                idComputador);
+                                idComputadorAzure);
 
-                        System.out.println("Insert realizado na tabela Monitoramento!");
+                        System.out.println("[Azure] - Insert realizado na tabela Monitoramento!");
+
+                        String sqlInsertMysql = "INSERT INTO Monitoramento"
+                                + "(processadorLogico, processadorFisico, usandoCpu, "
+                                + "usandoDisco, usandoRam, dataHoraCaptura, "
+                                + "tempoLigada, fkComputador) VALUES "
+                                + "(?, ?, ?, ?, ?, now(), ?, ?)";
+
+                        connectMysql.update(sqlInsertMysql,
+                                getProcessadorLogico(),
+                                getProcessadorFisico(),
+                                usabilidadeCpu.getUsabilidade(),
+                                usabilidadeDisco.getUsabilidade(),
+                                usabilidadeRam.getUsabilidade(),
+                                getTempoLigada(),
+                                idComputadorMysql);
+
+                        System.out.println("[Mysql] - Insert realizado na tabela Monitoramento!");
                     } else {
                         System.out.println("fkComputador Inválida!!!");
                         System.out.println("Insert Não Realizado!");

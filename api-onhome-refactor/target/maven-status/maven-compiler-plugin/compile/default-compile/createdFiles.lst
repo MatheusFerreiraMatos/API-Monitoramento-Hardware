@@ -26,7 +26,6 @@ client\TelaPrincipal$6.class
 client\TelaRam$4.class
 config\Slack.class
 services\Monitoramento$1.class
-services\Test.class
 client\TelaCpu$4.class
 client\TelaRam.class
 client\TelaLogin$4.class

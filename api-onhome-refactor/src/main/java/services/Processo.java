@@ -20,8 +20,11 @@ import utils.Log;
  */
 public class Processo {
 
-    Connection config = new Connection();
-    JdbcTemplate connect = new JdbcTemplate(config.getDataSource());
+    Connection configAzure = new Connection();
+    JdbcTemplate connectAzure = new JdbcTemplate(configAzure.getDataSource());
+    Connection configMysql = new Connection(true);
+    JdbcTemplate connectMysql = new JdbcTemplate(configMysql.getDataSource());
+
     ProcessosGroup processos = new ProcessosGroup();
 
     Computador comp = new Computador();
@@ -41,33 +44,54 @@ public class Processo {
             public void run() {
                 try {
 
-                    Integer idComputador = 0;
+                    Integer idComputadorAzure = 0;
 
-                    List<Computador> Listcomputador = connect.query("SELECT * FROM Computadores WHERE ipComputador = ? AND hostName = ?",
+                    List<Computador> ListcomputadorAzure = connectAzure.query("SELECT * FROM Computadores WHERE ipComputador = ? AND hostName = ?",
                             new BeanPropertyRowMapper(Computador.class), comp.getIpComputador(), comp.getHostName());
-                    for (Computador comp : Listcomputador) {
-                        idComputador = comp.getIdComputador();
+                    for (Computador comp : ListcomputadorAzure) {
+                        idComputadorAzure = comp.getIdComputador();
                     }
 
-                    if (!Listcomputador.isEmpty()) {
+                    Integer idComputadorMysql = 0;
+
+                    List<Computador> ListcomputadorMysql = connectAzure.query("SELECT * FROM Computadores WHERE ipComputador = ? AND hostName = ?",
+                            new BeanPropertyRowMapper(Computador.class), comp.getIpComputador(), comp.getHostName());
+                    for (Computador comp : ListcomputadorAzure) {
+                        idComputadorMysql = comp.getIdComputador();
+                    }
+
+                    if (!ListcomputadorAzure.isEmpty() || !ListcomputadorMysql.isEmpty()) {
                         for (int i = 0; i < processos.getProcessos().size(); i++) {
 
                             System.out.println("Realizando insert na tabela Processo...");
 
-                            String sqlInsert = "INSERT INTO Processo"
+                            String sqlInsertAzure = "INSERT INTO Processo"
                                     + "(nomeProcesso, usoCpu, usoMemoria, usoGpu,"
                                     + "fkComputador, dataCaptura)"
-                                    + "VALUES (?, ?, ?, ?, ?, ?)";
+                                    + "VALUES (?, ?, ?, ?, ?, GETDATE())";
 
-                            connect.update(sqlInsert,
+                            connectAzure.update(sqlInsertAzure,
                                     processos.getProcessos().get(i).getNome(),
                                     processos.getProcessos().get(i).getUsoCpu(),
                                     processos.getProcessos().get(i).getUsoMemoria(),
                                     processos.getProcessos().get(i).getMemoriaVirtualUtilizada(),
-                                    idComputador,
-                                    getDataHoraCaptura());
+                                    idComputadorAzure);
 
-                            System.out.println("Insert realizado na tabela Processo!");
+                            System.out.println("[Azure] - Insert realizado na tabela Processo!");
+
+                            String sqlInsertMysql = "INSERT INTO Processo"
+                                    + "(nomeProcesso, usoCpu, usoMemoria, usoGpu,"
+                                    + "dataCaptura, fkComputador)"
+                                    + "VALUES (?, ?, ?, ?, now(), ?)";
+
+                            connectMysql.update(sqlInsertMysql,
+                                    processos.getProcessos().get(i).getNome(),
+                                    processos.getProcessos().get(i).getUsoCpu(),
+                                    processos.getProcessos().get(i).getUsoMemoria(),
+                                    processos.getProcessos().get(i).getMemoriaVirtualUtilizada(),
+                                    idComputadorMysql);
+
+                            System.out.println("[Mysql] - Insert realizado na tabela Processo!");
                         }
                     } else {
                         System.out.println("fkComputador Inválida!!!");

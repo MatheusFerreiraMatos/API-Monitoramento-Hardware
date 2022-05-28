@@ -135,10 +135,11 @@ public class TelaLogin extends javax.swing.JFrame {
                 System.out.println("---------------------------[ Banco de Dados ]---------------------------\n");
                 System.out.println("Conectando ao Banco de Dados...\n");
                 System.out.println("Banco de Dados Conectado!\n");
+                System.out.println("-------------------------------[ Slack ]--------------------------------\n");
                 slack.pegarWebhook(email, senha);
                 gamificacao.enviarNotificacao(email, senha);
                 computador.insertComputador(email, senha);
-                System.out.println("-----------------------------[ Descrição ]------------------------------\n");
+                System.out.println("\n-----------------------------[ Descrição ]------------------------------\n");
                 monitoramento.insertMonitoramento();
                 situ.enviarSituacao();
                 processo.insertProcesso();

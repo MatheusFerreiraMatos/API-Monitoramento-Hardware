@@ -31,36 +31,45 @@ public class Computador {
     private Double tamanhoRam;
     private Integer fkUsuario;
 
-    Connection config = new Connection();
-    JdbcTemplate connect = new JdbcTemplate(config.getDataSource());
+    Connection configAzure = new Connection();
+    JdbcTemplate connectAzure = new JdbcTemplate(configAzure.getDataSource());
+    Connection configMysql = new Connection(true);
+    JdbcTemplate connectMysql = new JdbcTemplate(configMysql.getDataSource());
+
     Sistema sistema = new Sistema();
     Processador processador = new Processador();
     DiscosGroup disco = new DiscosGroup();
     Memoria memoria = new Memoria();
 
-    List<Computador> computador;
+    List<Computador> computadorAzure;
+    List<Computador> computadorMysql;
 
     public void insertComputador(String email, String senha) throws UnknownHostException {
         Log log = new Log();
         System.setOut(log);
         System.setErr(log);
-        System.out.println("-----------------------------[ Computador ]-----------------------------");
+        System.out.println("\n-----------------------------[ Computador ]-----------------------------\n");
         System.out.println("Validando computador...");
 
         String sqlSelect = ("SELECT * FROM Computadores WHERE ipComputador = ? AND hostName = ?");
 
-        computador = connect.query(sqlSelect,
+        computadorAzure = connectAzure.query(sqlSelect,
                 new BeanPropertyRowMapper<>(Computador.class),
                 getIpComputador(),
                 getHostName());
 
-        if (computador.isEmpty()) {
+        computadorMysql = connectMysql.query(sqlSelect,
+                new BeanPropertyRowMapper<>(Computador.class),
+                getIpComputador(),
+                getHostName());
+
+        if (computadorAzure.isEmpty() || computadorMysql.isEmpty()) {
             try {
                 System.out.println("Computador não existente na base de dados.\ninserindo...\n");
 
                 Integer idUsuario = 0;
 
-                List<Usuario> listUser = connect.query("SELECT * FROM Usuario WHERE emailUser = ? AND senhaUser = ?",
+                List<Usuario> listUser = connectAzure.query("SELECT * FROM Usuario WHERE emailUser = ? AND senhaUser = ?",
                         new BeanPropertyRowMapper(Usuario.class), email, senha);
                 for (Usuario user : listUser) {
                     idUsuario = user.getIdUsuario();
@@ -72,7 +81,7 @@ public class Computador {
                         + "tamanhoRam, fkUsuario) "
                         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-                connect.update(sqlInsert,
+                connectAzure.update(sqlInsert,
                         getIpComputador(),
                         getHostName(),
                         getSistemaOperacional(),
@@ -83,7 +92,20 @@ public class Computador {
                         getTamanhoRam(),
                         idUsuario);
 
-                System.out.println("Computador cadastrado com sucesso!!!");
+                System.out.println("[Azure] - Computador cadastrado com sucesso!!!");
+                
+                connectMysql.update(sqlInsert,
+                        getIpComputador(),
+                        getHostName(),
+                        getSistemaOperacional(),
+                        getModeloProcessador(),
+                        getIdProcessador(),
+                        getTamanhoDisco(),
+                        getTamanhoDiscoSecundario(),
+                        getTamanhoRam(),
+                        idUsuario);
+                
+                System.out.println("[Mysql] - Computador cadastrado com sucesso!!!");
             } catch (UnknownHostException ex) {
                 Logger.getLogger(Computador.class.getName()).log(Level.SEVERE, null, ex);
             }

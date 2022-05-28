@@ -22,7 +22,7 @@ public class Slack {
     JdbcTemplate connect = new JdbcTemplate(config.getDataSource());
     private static final HttpClient client = HttpClient.newHttpClient();
     private static final List<String> URL = new ArrayList<>();
-    
+
     public void pegarWebhook(String email, String senha) {
         List<Usuario> listUser = connect.query("SELECT * FROM Usuario WHERE emailUser = ? AND senhaUser = ?",
                 new BeanPropertyRowMapper(Usuario.class), email, senha);
@@ -34,9 +34,7 @@ public class Slack {
     public static void sendMessage(JSONObject content) throws IOException, InterruptedException {
 
         //URL.add("https://hooks.slack.com/services/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");
-
-        System.out.println("-------------------------------[ Slack ]--------------------------------");
-        System.out.println("\nEnviando mensagem para usuário...\n");
+        System.out.println("[Slack] - Enviando mensagem para usuário...");
 
         for (int i = 0; i < URL.size(); i++) {
 
@@ -48,12 +46,12 @@ public class Slack {
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            System.out.println(String.format("Status: %s", response.statusCode()));
-            System.out.println(String.format("Response: %s", response.body()));
             if (response.statusCode() == 200) {
-                System.out.println("Mensagem enviada com sucesso!\n");
+                System.out.println("[Slack] - Mensagem enviada com sucesso!");
             } else {
-                System.out.println("Mensagem não enviada! (X_X)\n");
+                System.out.println(String.format("Status: %s", response.statusCode()));
+                System.out.println(String.format("Response: %s", response.body()));
+                System.out.println("[Slack] - Mensagem não enviada! (X_X)");
             }
         }
 
