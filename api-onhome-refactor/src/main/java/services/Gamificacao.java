@@ -3,9 +3,8 @@ package services;
 import com.github.britooo.looca.api.group.processos.ProcessosGroup;
 import config.Connection;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import config.Slack;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -13,6 +12,8 @@ import org.json.JSONObject;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import utils.Log;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -34,8 +35,9 @@ public class Gamificacao {
     Integer idUsuario = 0;
     String nomeUser = "não identificado";
 
+    Log log = new Log();
+
     public void enviarNotificacao(String email, String senha) {
-        Log log = new Log();
         System.setOut(log);
         System.setErr(log);
         List<Usuario> listUser = connect.query("SELECT * FROM Usuario WHERE emailUser = ? AND senhaUser = ?",
@@ -45,7 +47,7 @@ public class Gamificacao {
             idUsuario = user.getIdUsuario();
         }
 
-        json.put("text", String.format("Relátório da Gamificação: \n"
+        json.put("text", String.format("Relatório da Gamificação: \n"
                 + "Nome do Usuário: %s\n"
                 + "Total de pontos: %d", nomeUser, pegarPontos()));
 
@@ -70,42 +72,42 @@ public class Gamificacao {
         return pontuacaoBanco;
     }
 
+    public List<String> pegarIdes() {
+        System.setOut(log);
+        System.setErr(log);
+        List<String> listaIdes = new ArrayList<>();
+        List<Ides> Ides = connect.query("SELECT * FROM Ides", new BeanPropertyRowMapper(Ides.class));
+
+        for (Ides ide : Ides) {
+            listaIdes.add(ide.getNome());
+        }
+
+        return listaIdes;
+    }
+
     public void atualizandoPontuacao() {
+        System.setOut(log);
+        System.setErr(log);
 
         Timer timer = new Timer();
-        Integer delay = 30000;
-        Integer interval = 5000;
-
-        System.out.println("Coletando dados para gerar pontuação");
+        Integer delay = 1000;
+        Integer interval = 30000;
 
         timer.scheduleAtFixedRate(new TimerTask() {
 
             public void run() {
-                for (int i = 0; i < processos.getProcessos().size(); i++) {
-                    //Fazer validação de total de quantidade de pontos!!!
-                    if (processos.getProcessos().get(i).getNome().equals("netbeans64")) {
-                        connect.update("UPDATE Gamificacao SET qtdPontos = ? WHERE fkUsuario = ?", pegarPontos() + 5, idUsuario);
-                        System.out.println("Update realizado na tabela Gamificação");
-                    }
-
-                    if (processos.getProcessos().get(i).getNome().equals("Code")) {
-                        connect.update("UPDATE Gamificacao SET qtdPontos = ? WHERE fkUsuario = ?", pegarPontos() + 5, idUsuario);
-                        System.out.println("Update realizado na tabela Gamificação");
-                    }
-
-                    if (processos.getProcessos().get(i).getNome().equals("postgres")) {
-                        connect.update("UPDATE Gamificacao SET qtdPontos = ? WHERE fkUsuario = ?", pegarPontos() + 5, idUsuario);
-                        System.out.println("Update realizado na tabela Gamificação");
-                    }
-
-                    if (processos.getProcessos().get(i).getNome().equals("java")) {
-                        connect.update("UPDATE Gamificacao SET qtdPontos = ? WHERE fkUsuario = ?", pegarPontos() + 5, idUsuario);
-                        System.out.println("Update realizado na tabela Gamificação");
-                    }
-
-                    if (processos.getProcessos().get(i).getNome().equals("mysqld")) {
-                        connect.update("UPDATE Gamificacao SET qtdPontos = ? WHERE fkUsuario = ?", pegarPontos() + 5, idUsuario);
-                        System.out.println("Update realizado na tabela Gamificação");
+                System.out.println("Coletando dados para gerar pontuação");
+                if (pegarPontos() >= 100) {
+                    System.out.println("Seu limite de pontos para a semana já foi atingido, "
+                            + "Parabéns meta da semana concluida! \\(^-^)/");
+                } else {
+                    for (String idesBanco : pegarIdes()) {
+                        for (int i = 0; i < processos.getProcessos().size(); i++) {
+                            if (idesBanco.equalsIgnoreCase(processos.getProcessos().get(i).getNome())) {
+                                connect.update("UPDATE Gamificacao SET qtdPontos = ? WHERE fkUsuario = ?", pegarPontos() + 2, idUsuario);
+                                System.out.println("Update realizado na tabela Gamificação");
+                            }
+                        }
                     }
                 }
             }

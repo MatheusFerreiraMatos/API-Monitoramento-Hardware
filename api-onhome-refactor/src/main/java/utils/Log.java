@@ -32,9 +32,9 @@ public class Log extends PrintStream {
     
     public Log() {
         super(System.out, true);
-        System.out.println("-".repeat(30));
-        System.out.println("Created by github.com/msuttobr");
-        System.out.println("Logger started in class: " + this.getClass().getName());
+        //System.out.println("-".repeat(30));
+        //System.out.println("Created by github.com/msuttobr");
+        //System.out.println("Logger started in class: " + this.getClass().getName());
         createDirectory();
         createFile();
     }

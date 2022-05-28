@@ -22,6 +22,7 @@ public class Usuario {
     private String nomeUsuario;
     private String emailUser;
     private String senhaUser;
+    private String webhook;
     private Integer fkEmpresa;
     private Integer fkPermissao;
     private Integer fkEspecialidade;
@@ -92,6 +93,14 @@ public class Usuario {
         this.senhaUser = senhaUser;
     }
 
+    public String getWebhook() {
+        return webhook;
+    }
+
+    public void setWebhook(String webhook) {
+        this.webhook = webhook;
+    }
+    
     public Integer getFkEmpresa() {
         return fkEmpresa;
     }

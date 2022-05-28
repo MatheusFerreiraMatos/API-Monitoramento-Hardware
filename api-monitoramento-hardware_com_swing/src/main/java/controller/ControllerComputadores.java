@@ -48,7 +48,7 @@ public class ControllerComputadores {
                 modelComputadores.getIpComputador(),
                 modelComputadores.getHostName());
 
-        if (computador.isEmpty()) {
+        if (!computador.isEmpty()) {
 
             try {
                 System.out.println("Computador não existente na base de dados.\ninserindo...\n");

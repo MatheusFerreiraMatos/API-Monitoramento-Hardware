@@ -27,7 +27,7 @@ public class Disco {
     }
 
     public Double getUsabilidade() {
-        Double usoDisco = Double.valueOf(totalDisco - discoDisponivel);
+        Double usoDisco = Double.valueOf(getTotalDisco() - getDiscoDisponivel());
         usabilidade = (usoDisco / totalDisco) * 100;
         return usabilidade;
     }

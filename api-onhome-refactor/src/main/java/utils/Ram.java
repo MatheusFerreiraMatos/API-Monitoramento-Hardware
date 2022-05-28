@@ -27,7 +27,7 @@ public class Ram {
     }
 
     public Double getUsabilidade() {
-        Double usoMemoria = totalMemoria - memoriaLivre;
+        Double usoMemoria = getTotalMemoria() - getMemoriaLivre();
         usabilidade = (usoMemoria / totalMemoria) * 100;
         return usabilidade;
     }

@@ -8,6 +8,9 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONObject;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import services.Usuario;
 
 /**
  *
@@ -15,15 +18,25 @@ import org.json.JSONObject;
  */
 public class Slack {
 
+    Connection config = new Connection();
+    JdbcTemplate connect = new JdbcTemplate(config.getDataSource());
     private static final HttpClient client = HttpClient.newHttpClient();
     private static final List<String> URL = new ArrayList<>();
+    
+    public void pegarWebhook(String email, String senha) {
+        List<Usuario> listUser = connect.query("SELECT * FROM Usuario WHERE emailUser = ? AND senhaUser = ?",
+                new BeanPropertyRowMapper(Usuario.class), email, senha);
+        for (Usuario user : listUser) {
+            URL.add(user.getWebhook());
+        }
+    }
 
     public static void sendMessage(JSONObject content) throws IOException, InterruptedException {
 
-        URL.add("https://hooks.slack.com/services/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");
+        //URL.add("https://hooks.slack.com/services/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");
 
         System.out.println("-------------------------------[ Slack ]--------------------------------");
-        System.out.println("\nEnviando mensagem de usuário logando...\n");
+        System.out.println("\nEnviando mensagem para usuário...\n");
 
         for (int i = 0; i < URL.size(); i++) {
 

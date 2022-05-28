@@ -1,5 +1,6 @@
 package client;
 
+import config.Slack;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -13,6 +14,7 @@ import services.Gamificacao;
 import services.Monitoramento;
 import services.Processo;
 import services.Usuario;
+import utils.SituacaoComputador;
 
 /**
  *
@@ -119,6 +121,8 @@ public class TelaLogin extends javax.swing.JFrame {
         Monitoramento monitoramento = new Monitoramento();
         Processo processo = new Processo();
         Gamificacao gamificacao = new Gamificacao();
+        Slack slack = new Slack();
+        SituacaoComputador situ = new SituacaoComputador();
         
         System.out.println("-------------------------------[ OnHome ]-------------------------------");
         System.out.println("\nOlá ao terminal da aplicação da OnHome \\(^-^)/\n");
@@ -131,10 +135,12 @@ public class TelaLogin extends javax.swing.JFrame {
                 System.out.println("---------------------------[ Banco de Dados ]---------------------------\n");
                 System.out.println("Conectando ao Banco de Dados...\n");
                 System.out.println("Banco de Dados Conectado!\n");
+                slack.pegarWebhook(email, senha);
                 gamificacao.enviarNotificacao(email, senha);
                 computador.insertComputador(email, senha);
                 System.out.println("-----------------------------[ Descrição ]------------------------------\n");
                 monitoramento.insertMonitoramento();
+                situ.enviarSituacao();
                 processo.insertProcesso();
                 gamificacao.atualizandoPontuacao();
                 telaPrincipal.setVisible(true);
