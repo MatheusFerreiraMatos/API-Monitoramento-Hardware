@@ -12,7 +12,7 @@ import services.Usuario;
 
 /**
  *
- * @author mathe
+ * @author Matheus Mattos
  */
 public class SituacaoComputador {
 
@@ -61,7 +61,7 @@ public class SituacaoComputador {
                             + ":computer: www.onhome.com.br\n\n"
                             + ":email: onhome.tech@gmail.com\n\n"
                             + "\n\n\n"
-                            + "A OnHome agradece a atenção.\n"
+                            + "A OnHome agradece a atenção.:house:\n"
                             + "Até mais! :simple_smile:", usaCpu, usaDisco, usaRam));
                     try {
                         Slack.sendMessage(json);
@@ -97,7 +97,7 @@ public class SituacaoComputador {
                             + ":computer: www.onhome.com.br\n\n"
                             + ":email: onhome.tech@gmail.com\n\n"
                             + "\n\n\n"
-                            + "A OnHome agradece a atenção.\n"
+                            + "A OnHome agradece a atenção.:house:\n"
                             + "Até mais! :simple_smile:", usaCpu, usaDisco, usaRam));
                     try {
                         Slack.sendMessage(json);
@@ -133,7 +133,7 @@ public class SituacaoComputador {
                             + ":computer: www.onhome.com.br\n\n"
                             + ":email: onhome.tech@gmail.com\n\n"
                             + "\n\n\n"
-                            + "A OnHome agradece a atenção.\n"
+                            + "A OnHome agradece a atenção.:house:\n"
                             + "Até mais! :simple_smile:", usaCpu, usaDisco, usaRam));
                     try {
                         Slack.sendMessage(json);

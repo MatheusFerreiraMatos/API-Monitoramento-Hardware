@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package utils;
 
 import java.io.File;
@@ -20,7 +16,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author aluno
+ * @author Rafael Ramos
  */
 public class Log extends PrintStream {
     public static List<String> list = new ArrayList<>();

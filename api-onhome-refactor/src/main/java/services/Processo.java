@@ -16,7 +16,7 @@ import utils.Log;
 
 /**
  *
- * @author mathe
+ * @author Matheus Mattos
  */
 public class Processo {
 

@@ -47,9 +47,24 @@ public class Gamificacao {
             idUsuario = user.getIdUsuario();
         }
 
-        json.put("text", String.format("Relatório da Gamificação: \n"
-                + "Nome do Usuário: %s\n"
-                + "Total de pontos: %d", nomeUser, pegarPontos()));
+        json.put("text", String.format("_Olá_ :raising_hand:\n"
+                + "\n"
+                + "\"_Cara você já teve a sensação de escrever o código, ver ele compilar e executar, "
+                + "mas não saber explicar o que foi que você fez?_\"\n"
+                + "-John\n"
+                + "\n"
+                + "Imagino que já né? :satisfied:\n"
+                + "\n\n"
+                + "Mais um dia normal de um desenvolvedor!\n"
+                + "\n\n"
+                + "Desejamos um ótimo dia para você, deixamos logo a seguir sua pontuação acumulada até agora:\n\n"
+                + "\n"
+                + "*Nome do Usuário:* %s\n"
+                + "*Total de pontos:* %d\n"
+                + "\n"
+                + "\n"
+                + "A OnHome agradece a atenção.:house:\n"
+                + "Até mais! :simple_smile:", nomeUser, pegarPontos()));
 
         try {
             Slack.sendMessage(json);

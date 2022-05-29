@@ -22,7 +22,7 @@ import utils.Ram;
 
 /**
  *
- * @author mathe
+ * @author Matheus Mattos
  */
 public class Monitoramento {
 
