@@ -6,6 +6,7 @@ import java.io.IOException;
 import config.Slack;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import org.json.JSONObject;
@@ -46,14 +47,24 @@ public class Gamificacao {
             nomeUser = user.getNomeUsuario();
             idUsuario = user.getIdUsuario();
         }
+        
+        int sort = new Random().nextInt(10) + 1;
+        
+        List<Frases> listFrases = connect.query("SELECT * FROM Frases WHERE idFrase = ?", new BeanPropertyRowMapper(Frases.class), sort);
+        
+        String fraseDaVez = "";
+        String autorDaVez = "";
+        
+        for (Frases listFrase : listFrases) {
+            fraseDaVez = listFrase.getFrase();
+            autorDaVez = listFrase.getAutor();
+        }
 
         json.put("text", String.format("_Olá_ :raising_hand:\n"
+                + "\n\n"
+                + "\"_%s_\"\n"
+                + "- %s\n"
                 + "\n"
-                + "\"_Cara você já teve a sensação de escrever o código, ver ele compilar e executar, "
-                + "mas não saber explicar o que foi que você fez?_\"\n"
-                + "-John\n"
-                + "\n"
-                + "Imagino que já né? :satisfied:\n"
                 + "\n\n"
                 + "Mais um dia normal de um desenvolvedor!\n"
                 + "\n\n"
@@ -64,7 +75,7 @@ public class Gamificacao {
                 + "\n"
                 + "\n"
                 + "A OnHome agradece a atenção.:house:\n"
-                + "Até mais! :simple_smile:", nomeUser, pegarPontos()));
+                + "Até mais! :simple_smile:", fraseDaVez, autorDaVez, nomeUser, pegarPontos()));
 
         try {
             Slack.sendMessage(json);
