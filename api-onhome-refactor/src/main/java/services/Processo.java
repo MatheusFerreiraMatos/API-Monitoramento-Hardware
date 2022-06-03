@@ -31,8 +31,8 @@ public class Processo {
     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
     Timer timer = new Timer();
-    Integer delay = 30000;
-    Integer interval = 5000;
+    Integer delay = 2000; // 2 Minutos
+    Integer interval = 300000; // 5 Minutos
 
     public void insertProcesso() {
         Log log = new Log();

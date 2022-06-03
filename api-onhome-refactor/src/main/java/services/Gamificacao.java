@@ -89,7 +89,7 @@ public class Gamificacao {
     public Integer pegarPontos() {
         Integer pontuacaoBanco = 0;
 
-        List<Gamificacao> listgame = connect.query("SELECT * FROM Gamificacao WHERE fkUsuario = ?",
+        List<Gamificacao> listgame = connect.query("SELECT sum(qtdPontos) as qtdPontos FROM Gamificacao WHERE fkUsuario = ?",
                 new BeanPropertyRowMapper(Gamificacao.class), idUsuario);
 
         for (Gamificacao game : listgame) {
@@ -116,8 +116,8 @@ public class Gamificacao {
         System.setErr(log);
 
         Timer timer = new Timer();
-        Integer delay = 1000;
-        Integer interval = 30000;
+        Integer delay = 2000; // 2 Minutos
+        Integer interval = 300000; // 5 Minutos
 
         timer.scheduleAtFixedRate(new TimerTask() {
 
@@ -130,8 +130,8 @@ public class Gamificacao {
                     for (String idesBanco : pegarIdes()) {
                         for (int i = 0; i < processos.getProcessos().size(); i++) {
                             if (idesBanco.equalsIgnoreCase(processos.getProcessos().get(i).getNome())) {
-                                connect.update("UPDATE Gamificacao SET qtdPontos = ? WHERE fkUsuario = ?", pegarPontos() + 2, idUsuario);
-                                System.out.println("Update realizado na tabela Gamificação");
+                                connect.update("INSERT INTO Gamificacao(qtdPontos, dataHoraCaptura, fkUsuario) VALUES (?, '2022-05-25', ?)", 2, idUsuario);
+                                System.out.println("***[Slack] - Insert realizado na tabela Gamificação");
                             }
                         }
                     }
